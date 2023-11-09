@@ -7,28 +7,19 @@ use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/recipe')]
 class RecipeController extends AbstractController
 {
     #[Route('/', name: 'app_recipe_index', methods: ['GET'])]
-    public function index(RecipeRepository $recipeRepository, SerializerInterface $serializer): Response
+    public function index(RecipeRepository $recipeRepository): Response
     {
         return $this->render('recipe/index.html.twig', [
             'recipes' => $recipeRepository->findAll(),
         ]);
-/*
- * Pour retourner le json pour l'api
-        $recipes = $recipeRepository->findAll();
-        $jsonRecipes = $serializer->serialize($recipes, JsonEncoder::FORMAT);
-
-        return new JsonResponse(data: $jsonRecipes, json: true);*/
     }
 
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]

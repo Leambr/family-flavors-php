@@ -2,7 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\DishType;
 use App\Entity\Recipe;
+use App\Repository\DishTypeRepository;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,7 +17,6 @@ class RecipeType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('dish_type')
             ->add('diet_type')
             ->add('serving')
             ->add('prep_time')
@@ -21,7 +24,15 @@ class RecipeType extends AbstractType
             ->add('instructions')
             ->add('image_url')
             ->add('season')
-        ;
+            ->add('dishType', EntityType::class, [
+                'class' => DishType::class,
+                'query_builder' => function (DishTypeRepository $er): QueryBuilder {
+                    return $er->createQueryBuilder('d')
+                        ->orderBy('d.name', 'ASC');
+                },
+                'choice_label' => function (DishType $dishType) {
+                    return $dishType->getId() . $dishType->getName();
+                }]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
