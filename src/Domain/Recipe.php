@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain;
 
-use App\Repository\RecipeRepository;
+use App\Infrastructure\Repository\RecipeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -59,12 +59,12 @@ class Recipe
         return $this;
     }
 
-    public function getDishType(): ?string
+    public function getDishType(): ?DishType
     {
         return $this->dishType;
     }
 
-    public function setDishType(string $dishType): static
+    public function setDishType(DishType $dishType): static
     {
         $this->dishType = $dishType;
 

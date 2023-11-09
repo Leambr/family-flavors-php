@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Form;
+namespace App\UserInterface\Form;
 
-use App\Entity\DishType;
+use App\Domain\DishType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

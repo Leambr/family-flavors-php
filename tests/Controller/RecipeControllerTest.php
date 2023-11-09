@@ -2,8 +2,8 @@
 
 namespace App\Test\Controller;
 
-use App\Entity\Recipe;
-use App\Repository\RecipeRepository;
+use App\Domain\Recipe;
+use App\Infrastructure\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain;
 
-use App\Repository\SeasonRepository;
+use App\Infrastructure\Repository\SeasonRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 

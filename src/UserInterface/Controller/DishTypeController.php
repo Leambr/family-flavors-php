@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\UserInterface\Controller;
 
-use App\Entity\DishType;
-use App\Form\DishTypeType;
-use App\Repository\DishTypeRepository;
+use App\Domain\DishType;
+use App\Infrastructure\Repository\DishTypeRepository;
+use App\UserInterface\Form\DishTypeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

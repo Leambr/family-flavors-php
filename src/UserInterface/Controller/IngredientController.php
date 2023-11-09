@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\UserInterface\Controller;
 
-use App\Entity\Ingredient;
-use App\Form\IngredientType;
-use App\Repository\IngredientRepository;
+use App\Domain\Ingredient;
+use App\Infrastructure\Repository\IngredientRepository;
+use App\UserInterface\Form\IngredientType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

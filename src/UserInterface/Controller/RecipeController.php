@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\UserInterface\Controller;
 
-use App\Entity\Recipe;
-use App\Form\RecipeType;
-use App\Repository\RecipeRepository;
+use App\Application\Recipe\CreateRecipeService;
+use App\Domain\Recipe;
+use App\Infrastructure\Repository\RecipeRepository;
+use App\UserInterface\Form\RecipeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,15 +24,26 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, CreateRecipeService $createRecipeService): Response
     {
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
+        $parameters = $request->request->all();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($recipe);
-            $entityManager->flush();
+            $createRecipeService->createRecipe(
+                $parameters['recipe']['title'],
+                $parameters['recipe']['diet_type'],
+                $parameters['recipe']['serving'],
+                $parameters['recipe']['prep_time'],
+                $parameters['recipe']['cook_time'],
+                $parameters['recipe']['instructions'],
+                $parameters['recipe']['image_url'],
+                $parameters['recipe']['season'],
+                $parameters['recipe']['dishType'],
+            );
+
 
             return $this->redirectToRoute('app_recipe_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -71,7 +83,7 @@ class RecipeController extends AbstractController
     #[Route('/{id}', name: 'app_recipe_delete', methods: ['POST'])]
     public function delete(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$recipe->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $recipe->getId(), $request->request->get('_token'))) {
             $entityManager->remove($recipe);
             $entityManager->flush();
         }

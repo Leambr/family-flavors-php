@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Form;
+namespace App\UserInterface\Form;
 
-use App\Entity\DishType;
-use App\Entity\Recipe;
-use App\Repository\DishTypeRepository;
+use App\Domain\DishType;
+use App\Domain\Recipe;
+use App\Infrastructure\Repository\DishTypeRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

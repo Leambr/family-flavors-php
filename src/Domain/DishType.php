@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Domain;
 
-use App\Repository\DishTypeRepository;
+use App\Infrastructure\Repository\DishTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,14 +16,16 @@ class DishType
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\OneToMany(mappedBy: 'dishType', targetEntity: Recipe::class)]
     private Collection $recipes;
 
-    public function __construct()
+    public function __construct(string $name)
     {
         $this->recipes = new ArrayCollection();
+        $this->name = $name;
+
     }
 
     public function getId(): ?int
@@ -31,7 +33,7 @@ class DishType
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
