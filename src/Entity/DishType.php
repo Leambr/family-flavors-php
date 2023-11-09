@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CategoryRepository;
+use App\Repository\DishTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategoryRepository::class)]
-class Category
+#[ORM\Entity(repositoryClass: DishTypeRepository::class)]
+class DishType
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,7 +18,7 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Recipe::class)]
+    #[ORM\OneToMany(mappedBy: 'dishType', targetEntity: Recipe::class)]
     private Collection $recipes;
 
     public function __construct()
@@ -55,7 +55,7 @@ class Category
     {
         if (!$this->recipes->contains($recipe)) {
             $this->recipes->add($recipe);
-            $recipe->setCategory($this);
+            $recipe->setDishType($this);
         }
 
         return $this;
@@ -65,8 +65,8 @@ class Category
     {
         if ($this->recipes->removeElement($recipe)) {
             // set the owning side to null (unless already changed)
-            if ($recipe->getCategory() === $this) {
-                $recipe->setCategory(null);
+            if ($recipe->getDishType() === $this) {
+                $recipe->setDishType(null);
             }
         }
 

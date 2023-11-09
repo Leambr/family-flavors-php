@@ -47,7 +47,7 @@ class RecipeControllerTest extends WebTestCase
 
         $this->client->submitForm('Save', [
             'recipe[title]' => 'Testing',
-            'recipe[category]' => 'Testing',
+            'recipe[dish_type]' => 'Testing',
             'recipe[diet_type]' => 'Testing',
             'recipe[serving]' => 'Testing',
             'recipe[prep_time]' => 'Testing',
@@ -67,7 +67,7 @@ class RecipeControllerTest extends WebTestCase
         $this->markTestIncomplete();
         $fixture = new Recipe();
         $fixture->setTitle('My Title');
-        $fixture->setCategory('My Title');
+        $fixture->setDishType('My Title');
         $fixture->setDiet_type('My Title');
         $fixture->setServing('My Title');
         $fixture->setPrep_time('My Title');
@@ -92,7 +92,7 @@ class RecipeControllerTest extends WebTestCase
         $this->markTestIncomplete();
         $fixture = new Recipe();
         $fixture->setTitle('My Title');
-        $fixture->setCategory('My Title');
+        $fixture->setDishType('My Title');
         $fixture->setDiet_type('My Title');
         $fixture->setServing('My Title');
         $fixture->setPrep_time('My Title');
@@ -108,7 +108,7 @@ class RecipeControllerTest extends WebTestCase
 
         $this->client->submitForm('Update', [
             'recipe[title]' => 'Something New',
-            'recipe[category]' => 'Something New',
+            'recipe[dish_type]' => 'Something New',
             'recipe[diet_type]' => 'Something New',
             'recipe[serving]' => 'Something New',
             'recipe[prep_time]' => 'Something New',
@@ -123,7 +123,7 @@ class RecipeControllerTest extends WebTestCase
         $fixture = $this->repository->findAll();
 
         self::assertSame('Something New', $fixture[0]->getTitle());
-        self::assertSame('Something New', $fixture[0]->getCategory());
+        self::assertSame('Something New', $fixture[0]->getDishType());
         self::assertSame('Something New', $fixture[0]->getDiet_type());
         self::assertSame('Something New', $fixture[0]->getServing());
         self::assertSame('Something New', $fixture[0]->getPrep_time());
@@ -141,7 +141,7 @@ class RecipeControllerTest extends WebTestCase
 
         $fixture = new Recipe();
         $fixture->setTitle('My Title');
-        $fixture->setCategory('My Title');
+        $fixture->setDishType('My Title');
         $fixture->setDiet_type('My Title');
         $fixture->setServing('My Title');
         $fixture->setPrep_time('My Title');

@@ -40,7 +40,7 @@ class Recipe
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Category $category = null;
+    private ?DishType $dishType = null;
 
     public function getId(): ?int
     {
@@ -59,14 +59,14 @@ class Recipe
         return $this;
     }
 
-    public function getCategory(): ?string
+    public function getDishType(): ?string
     {
-        return $this->category;
+        return $this->dishType;
     }
 
-    public function setCategory(string $category): static
+    public function setDishType(string $dishType): static
     {
-        $this->category = $category;
+        $this->dishType = $dishType;
 
         return $this;
     }
