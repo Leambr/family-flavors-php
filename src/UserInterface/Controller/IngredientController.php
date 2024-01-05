@@ -3,7 +3,7 @@
 namespace App\UserInterface\Controller;
 
 use App\Domain\Ingredient;
-use App\Infrastructure\Repository\IngredientRepository;
+use App\Infrastructure\Doctrine\Repository\IngredientRepository;
 use App\UserInterface\Form\IngredientType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

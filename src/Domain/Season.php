@@ -2,7 +2,7 @@
 
 namespace App\Domain;
 
-use App\Infrastructure\Repository\SeasonRepository;
+use App\Infrastructure\Doctrine\Repository\SeasonRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 

@@ -3,7 +3,7 @@
 namespace App\UserInterface\Controller;
 
 use App\Domain\DishType;
-use App\Infrastructure\Repository\DishTypeRepository;
+use App\Infrastructure\Doctrine\Repository\DishTypeRepository;
 use App\UserInterface\Form\DishTypeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -3,8 +3,7 @@
 namespace App\UserInterface\Form;
 
 use App\Domain\DishType;
-use App\Domain\Recipe;
-use App\Infrastructure\Repository\DishTypeRepository;
+use App\Infrastructure\Doctrine\Repository\DishTypeRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -26,10 +25,10 @@ class RecipeType extends AbstractType
             ->add('season')
             ->add('dishType', EntityType::class, [
                 'class' => DishType::class,
-                'query_builder' => function (DishTypeRepository $er): QueryBuilder {
-                    return $er->createQueryBuilder('d')
-                        ->orderBy('d.name', 'ASC');
-                },
+//                'query_builder' => function (DishTypeRepository $er): QueryBuilder {
+//                    return $er->createQueryBuilder('d')
+//                        ->orderBy('d.name', 'ASC');
+//                },
                 'choice_label' => function (DishType $dishType) {
                     return $dishType->getId() . $dishType->getName();
                 }]);
@@ -38,7 +37,7 @@ class RecipeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Recipe::class,
+            'data_class' => null,
         ]);
     }
 }

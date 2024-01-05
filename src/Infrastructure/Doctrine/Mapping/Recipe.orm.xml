@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Domain\Recipe" repository-class="App\Infrastructure\Doctrine\Repository\RecipeRepository" table="recipe">
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+
+        <field name="title" type="string" length="255"/>
+        <field name="diet_type" type="string" length="255"/>
+        <field name="serving" type="integer"/>
+        <field name="prep_time" type="integer"/>
+        <field name="cook_time" type="integer"/>
+        <field name="instructions" type="text"/>
+        <field name="image_url" type="string" length="255"/>
+        <field name="season" type="string" length="255"/>
+        <many-to-one field="dishType" target-entity="DishType">
+            <join-column name="dish_type_id" referenced-column-name="id" />
+        </many-to-one>
+    </entity>
+
+    <entity name="App\Domain\DishType" repository-class="App\Infrastructure\Doctrine\Repository\DishTypeRepository" table="dish_type">
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+
+        <field name="name" type="string" length="255"/>
+        <one-to-many field="recipes" target-entity="Recipe" mapped-by="dishType"/>
+    </entity>
+</doctrine-mapping>
+
+

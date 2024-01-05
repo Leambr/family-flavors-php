@@ -4,7 +4,7 @@ namespace App\UserInterface\Controller;
 
 use App\Application\Recipe\CreateRecipeService;
 use App\Domain\Recipe;
-use App\Infrastructure\Repository\RecipeRepository;
+use App\Infrastructure\Doctrine\Repository\RecipeRepository;
 use App\UserInterface\Form\RecipeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,8 +26,7 @@ class RecipeController extends AbstractController
     #[Route('/new', name: 'app_recipe_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CreateRecipeService $createRecipeService): Response
     {
-        $recipe = new Recipe();
-        $form = $this->createForm(RecipeType::class, $recipe);
+        $form = $this->createForm(RecipeType::class, []);
         $form->handleRequest($request);
         $parameters = $request->request->all();
 
@@ -49,7 +48,6 @@ class RecipeController extends AbstractController
         }
 
         return $this->render('recipe/new.html.twig', [
-            'recipe' => $recipe,
             'form' => $form,
         ]);
     }

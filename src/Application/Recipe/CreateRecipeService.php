@@ -2,14 +2,13 @@
 
 namespace App\Application\Recipe;
 
-use App\Domain\DishType;
 use App\Domain\Recipe;
-use App\Infrastructure\Repository\DishTypeRepository;
-use App\Infrastructure\Repository\RecipeRepository;
+use App\Infrastructure\Doctrine\Repository\DishTypeRepository;
+use App\Infrastructure\Doctrine\Repository\RecipeRepository;
 
 class CreateRecipeService
 {
-    public function __construct(private RecipeRepository $recipeRepository, private DishTypeRepository $dishTypeRepository)
+    public function __construct(private readonly RecipeRepository $recipeRepository, private readonly DishTypeRepository $dishTypeRepository)
     {
 
     }
@@ -26,19 +25,9 @@ class CreateRecipeService
         int $dishTypeId
     ): void
     {
-        $recipe = new Recipe();
-
-        $recipe->setTitle($title);
-        $recipe->setDietType($dietType);
-        $recipe->setServing($serving);
-        $recipe->setPrepTime($prepTime);
-        $recipe->setCookTime($cookTime);
-        $recipe->setInstructions($instructions);
-        $recipe->setImageUrl($image_url);
-        $recipe->setSeason($season);
-
         $dishType = $this->dishTypeRepository->find($dishTypeId);
-        $recipe->setDishType($dishType);
+
+        $recipe = new Recipe($title, $dietType, $serving, $prepTime, $cookTime, $instructions, $image_url, $season, $dishType);
 
         $this->recipeRepository->save($recipe);
     }

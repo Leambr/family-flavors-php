@@ -2,30 +2,29 @@
 
 namespace App\Domain;
 
-use App\Infrastructure\Repository\DishTypeRepository;
+use App\Infrastructure\Doctrine\Repository\DishTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DishTypeRepository::class)]
+//#[ORM\Entity(repositoryClass: DishTypeRepository::class)]
 class DishType
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+//    #[ORM\Id]
+//    #[ORM\GeneratedValue]
+//    #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+//    #[ORM\Column(length: 255)]
     private string $name;
 
-    #[ORM\OneToMany(mappedBy: 'dishType', targetEntity: Recipe::class)]
+//    #[ORM\OneToMany(mappedBy: 'dishType', targetEntity: Recipe::class)]
     private Collection $recipes;
 
     public function __construct(string $name)
     {
         $this->recipes = new ArrayCollection();
         $this->name = $name;
-
     }
 
     public function getId(): ?int
